@@ -96,6 +96,14 @@ contract ShopChain {
 		_;
 	}
 
+	modifier buyerIsNotSeller {
+		require(
+            !sellers[msg.sender],
+            "ERROR: You are registered as a seller. Please use another address."
+        );
+		_;
+	}
+
 	event OrderCreated(Order);
 	event OrderConfirmed(Order);
 	event OrderDeleted(Order);
@@ -116,13 +124,14 @@ contract ShopChain {
     /**
      *  The buyer makes an order and sends his funds to the smart contract (inside the object Order)
      */
-	function createOrder(address payable seller, uint256 amount)
+	function createOrder(address payable seller)
 		external
 		payable
 		sellerExists(seller)
+		buyerIsNotSeller
 	{
 		require(
-			amount > 0 && msg.value > 0, 
+			msg.value > 0, 
 			"ERROR: The order amount can't be null."
 		);
 
@@ -134,7 +143,7 @@ contract ShopChain {
 		logs[orderId].push(
 			Log(State.created, block.timestamp)
 		);
-		Order memory newOrder = Order(orderId, buyer, seller, amount, State.created);
+		Order memory newOrder = Order(orderId, buyer, seller, msg.value, State.created);
 		orders[orderId] = newOrder;
 		ordersBuyers[buyer].push(orderId);
 		ordersSellers[seller].push(orderId);
@@ -275,6 +284,10 @@ contract ShopChain {
 			!sellers[msg.sender],
 			"ERROR: You are already a seller."
 		);
+        require(
+            !buyers[msg.sender],
+            "ERROR: You are a buyer, please use another address."
+        );
 		sellers[msg.sender] = true;
 		sellersIterable[totalSellers.current()] = msg.sender;
 		totalSellers.increment();
