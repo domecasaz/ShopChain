@@ -1,9 +1,9 @@
 export interface Order {
     id: number;
-    buyerAddress: String;
-    sellerAddress: String;
+    buyerAddress: string;
+    sellerAddress: string;
     amount: number;
-    state: String;
+    state: string;
 }
 
 export enum State {
