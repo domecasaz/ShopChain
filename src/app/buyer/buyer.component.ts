@@ -11,7 +11,8 @@ export class BuyerComponent implements OnInit {
   constructor(private smartContract : SmartcontractService) { }
 
   async ngOnInit() : Promise<void> {
-    await this.smartContract.initializeContract();
+    if(await this.smartContract.isRightChain()) {
+      await this.smartContract.initializeContract();
+    }
   }
-
 }

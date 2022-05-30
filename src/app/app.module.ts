@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { OrdersComponent } from './orders/orders.component';
 import { BuyerComponent } from './buyer/buyer.component';
 import { HeaderComponent } from './header/header.component';
+import { SwitchNetworkComponent } from './switch-network/switch-network.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrdersComponent,
     BuyerComponent,
-    HeaderComponent
+    HeaderComponent,
+    SwitchNetworkComponent
   ],
   imports: [
     BrowserModule,

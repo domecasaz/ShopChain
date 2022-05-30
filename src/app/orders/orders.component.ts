@@ -23,9 +23,11 @@ export class OrdersComponent implements OnInit {
   constructor(private smartContract : SmartcontractService) { }
 
   async ngOnInit() : Promise<void> {
-    await this.smartContract.initializeContract();
-    await this.getOrders();
-    await this.getOrderById();
+    if(await this.smartContract.isRightChain()) {
+      await this.smartContract.initializeContract();
+      await this.getOrders();
+      await this.getOrderById();
+    }
   }
 
   async getOrders() : Promise<void> {
