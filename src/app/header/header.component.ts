@@ -13,9 +13,7 @@ export class HeaderComponent implements OnInit {
   constructor(private smartContract : SmartcontractService) {}
 
   async ngOnInit() : Promise<void> {
-    if(await this.smartContract.isRightChain()) {
-      await this.smartContract.initializeContract();
-      this.currentAddress = SmartcontractService.currentAddress;
-    }
+    await this.smartContract.initializeContract();
+    this.currentAddress = SmartcontractService.currentAddress;
   }
 }

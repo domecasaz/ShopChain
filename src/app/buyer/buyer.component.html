@@ -1,1 +1,6 @@
-<app-orders></app-orders>
+<app-switch-network *ngIf="!rightChain"></app-switch-network>
+
+<div *ngIf="rightChain">
+    <app-header></app-header>
+    <app-orders></app-orders>
+</div>

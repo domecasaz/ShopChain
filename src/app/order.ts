@@ -7,10 +7,10 @@ export interface Order {
 }
 
 export enum State {
-    created,
-	shipped,
-	confirmed,
-	deleted,
-	refundAsked,
-	refunded
+    Created,
+	Shipped,
+	Confirmed,
+	Deleted,
+	RefundAsked,
+	Refunded
 }

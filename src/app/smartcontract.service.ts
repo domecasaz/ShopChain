@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
 import contract from '../../contracts/ShopChain.json';
 import detectEthereumProvider from "@metamask/detect-provider";
+import { from, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,35 +12,44 @@ export class SmartcontractService {
   public static smartContract : any = undefined;
   public static currentAddress : string;
   public static smartContractAddress : string = contract.contractAddress;
-  public static provider : any;
-  public static chainId : number = 43113;
+  private static ethereum : any = window.ethereum;
+  private static provider : any = new ethers.providers.Web3Provider(SmartcontractService.ethereum);
+  public static chainId : string = "0xa869";
   public static rightChain : boolean = true;
   constructor() {}
 
+  private static async getWebProvider() {
+    const provider : any = await detectEthereumProvider();
+    return new ethers.providers.Web3Provider(provider);
+  }
+
+  public connectWallet() {
+    return from(SmartcontractService.getWebProvider()).pipe(
+      switchMap(async (provider) => {
+        if (!provider)
+          throw new Error("Please install MetaMask");
+        
+        SmartcontractService.currentAddress = await SmartcontractService.ethereum.request({ method: 'eth_requestAccounts' });
+        return SmartcontractService.currentAddress !== undefined;
+      }),
+    );
+  }
+
   async initializeContract() {
     if(SmartcontractService.smartContract === undefined) {
-      const provider = await SmartcontractService.getWebProvider();
       SmartcontractService.smartContract = new ethers.Contract(
         contract.contractAddress,
         contract.abi,
-        provider.getSigner(),
+        SmartcontractService.provider.getSigner(),
       );
     }
+    SmartcontractService.currentAddress = await SmartcontractService.ethereum.request({ method: 'eth_requestAccounts' });
   }
 
-  async isRightChain() : Promise<boolean> {
-    const provider = await SmartcontractService.getWebProvider();
-    return (await provider.getNetwork()).chainId === SmartcontractService.chainId;
+  isRightChain() : boolean {
+    return SmartcontractService.ethereum.chainId === SmartcontractService.chainId;
   }
-
-  private static async getWebProvider(requestAccounts = true) {
-    SmartcontractService.provider = await detectEthereumProvider();
-    if (requestAccounts)
-      SmartcontractService.currentAddress =  await SmartcontractService.provider.request({ method: 'eth_requestAccounts' })
-
-    return new ethers.providers.Web3Provider(SmartcontractService.provider)
-  }
-
+  
   public async registerSeller() : Promise<any> {
     const transaction = await SmartcontractService.smartContract.registerAsSeller();
     const tx = await transaction.wait();
@@ -67,41 +77,43 @@ export class SmartcontractService {
   }
 
   public listenerAccountChange() : void {
-    SmartcontractService.provider.on("accountsChanged",async () => {
+    SmartcontractService.ethereum.on("accountsChanged", async () => {
       await this.initializeContract();
       window.location.reload();
-    })
+    });
   }
 
   public listenerNetworkChange() : void {
-    SmartcontractService.provider.on("chainChanged", () => {
-      console.log(SmartcontractService.provider.chainId);
-      if (SmartcontractService.provider.chainId === SmartcontractService.chainId) {
+    SmartcontractService.ethereum.on("chainChanged", () => {
+      console.log(SmartcontractService.ethereum.chainId);
+      if (SmartcontractService.ethereum.chainId === SmartcontractService.chainId) {
         SmartcontractService.rightChain = true;
       } else {
         SmartcontractService.rightChain = false;
       }
       window.location.reload();
-    })
+    });
   }
 
   public async changeNetwork() : Promise<void> {
-    console.log("ci sono")
-    console.log("0x" + SmartcontractService.chainId.toString(16))
     try {
-      await SmartcontractService.provider.request({
+      await SmartcontractService.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: "0x" + SmartcontractService.chainId.toString(16) }],
+        params: [{ chainId: SmartcontractService.chainId }],
       });
       window.location.reload();
     } catch (error : any) {
       console.log(error);
       if (error.code === 4902) {
-        await SmartcontractService.provider.request({
+        await SmartcontractService.ethereum.request({
           method: "wallet_addEthereumChain",
           params: [{ chainId: SmartcontractService.chainId }],
         });
       }
     }
+  }
+
+  public async askRefund(id : number) : Promise<void> {
+    await SmartcontractService.smartContract.askRefund(id);
   }
 }

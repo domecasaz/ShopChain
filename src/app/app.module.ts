@@ -7,6 +7,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { BuyerComponent } from './buyer/buyer.component';
 import { HeaderComponent } from './header/header.component';
 import { SwitchNetworkComponent } from './switch-network/switch-network.component';
+import { AccessComponent } from './access/access.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SwitchNetworkComponent } from './switch-network/switch-network.componen
     OrdersComponent,
     BuyerComponent,
     HeaderComponent,
-    SwitchNetworkComponent
+    SwitchNetworkComponent,
+    AccessComponent
   ],
   imports: [
     BrowserModule,

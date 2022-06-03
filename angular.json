@@ -18,8 +18,9 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
+              "rxjs-compat",
               "lodash"
-           ],
+            ],
             "outputPath": "dist/shopchain",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,10 +33,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
-            "allowedCommonJsDependencies": [
-              "lodash"
-           ]
+            "scripts": []
           },
           "configurations": {
             "production": {

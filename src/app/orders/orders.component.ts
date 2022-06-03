@@ -20,14 +20,12 @@ export class OrdersComponent implements OnInit {
   order?: Order;
   orders : Array<Order> = [];
 
-  constructor(private smartContract : SmartcontractService) { }
+  constructor(private smartContract : SmartcontractService) {}
 
   async ngOnInit() : Promise<void> {
-    if(await this.smartContract.isRightChain()) {
-      await this.smartContract.initializeContract();
-      await this.getOrders();
-      await this.getOrderById();
-    }
+    await this.smartContract.initializeContract();
+    await this.getOrders();
+    await this.getOrderById();
   }
 
   async getOrders() : Promise<void> {
@@ -40,11 +38,15 @@ export class OrdersComponent implements OnInit {
         amount: Number(ethers.utils.formatEther(element[3].toString())),
         state: State[element[4]],
       }
-      this.orders.push(order)
-    })
+      this.orders.push(order);
+    });
   }
 
   async getOrderById() {
     this.actualOrder = await this.smartContract.getOrderById(1);
+  }
+
+  async askRefund(id : number) {
+    await this.smartContract.askRefund(id);
   }
 }
