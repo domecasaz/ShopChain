@@ -1,0 +1,6 @@
+<label for="price">Price: </label>
+<input type="number" name="price" id="price" [formControl]="price">
+<label for="sellerAddress">Seller Address: </label>
+<input type="text" name="seller" id="seller" [formControl]="sellerAddress">
+
+<button (click)="createOrder()">Create Order</button>

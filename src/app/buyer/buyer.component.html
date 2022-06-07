@@ -1,6 +1,10 @@
-<app-switch-network *ngIf="!rightChain"></app-switch-network>
-
-<div *ngIf="rightChain">
-    <app-header></app-header>
-    <app-orders></app-orders>
-</div>
+<div *ngIf="!rightChain; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <app-switch-network *ngIf="!rightChain"></app-switch-network>
+</ng-template>
+<ng-template #elseBlock>
+    <div *ngIf="rightChain">
+        <app-header></app-header>
+        <app-orders></app-orders>
+    </div>
+</ng-template>

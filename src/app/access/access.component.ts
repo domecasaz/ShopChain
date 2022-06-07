@@ -12,10 +12,19 @@ export class AccessComponent implements OnInit {
 
   ngOnInit() : void {}
 
-  async connectWallet() {
+  async connectWalletHome() {
     this.smartContract.connectWallet().subscribe((isConnected) => {
       if (isConnected){
         window.location.href = '/home';
+      } 
+    }
+    );
+  }
+
+  async connectWalletLanding() {
+    this.smartContract.connectWallet().subscribe((isConnected) => {
+      if (isConnected){
+        window.location.href = '/landingpage';
       } 
     }
     );

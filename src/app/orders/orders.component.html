@@ -18,7 +18,11 @@
                 <td>{{order.sellerAddress}}</td>
                 <td>{{order.amount}}</td>
                 <td>{{order.state}}</td>
-                <td><button *ngIf="order.state === 'Created' || order.state === 'Shipped' || order.state === 'Confirmed'" (click)="askRefund(order.id)">Ask refund</button></td>
+                <td>
+                    <div *ngIf="order.state === 'Created' || order.state === 'Shipped' || order.state === 'Confirmed'; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock><button (click)="askRefund(order.id)">Ask refund</button></ng-template>
+                    <ng-template #elseBlock>No operations available</ng-template>                    
+                </td>
             </tr>
         </tbody>
     </table>

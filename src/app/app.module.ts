@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +9,7 @@ import { BuyerComponent } from './buyer/buyer.component';
 import { HeaderComponent } from './header/header.component';
 import { SwitchNetworkComponent } from './switch-network/switch-network.component';
 import { AccessComponent } from './access/access.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,15 @@ import { AccessComponent } from './access/access.component';
     BuyerComponent,
     HeaderComponent,
     SwitchNetworkComponent,
-    AccessComponent
+    AccessComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
