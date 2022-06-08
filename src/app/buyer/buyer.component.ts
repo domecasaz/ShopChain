@@ -15,7 +15,6 @@ export class BuyerComponent implements OnInit {
     this.smartContract.connectWallet().subscribe(async (isConnected) => {
       if (isConnected) {
         if (this.smartContract.isRightChain()) {
-          await this.smartContract.initializeContract();
           this.smartContract.listenerAccountChange();
           this.smartContract.listenerNetworkChange();
           this.rightChain = true;

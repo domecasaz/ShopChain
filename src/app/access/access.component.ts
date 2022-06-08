@@ -14,7 +14,7 @@ export class AccessComponent implements OnInit {
 
   async connectWalletHome() {
     this.smartContract.connectWallet().subscribe((isConnected) => {
-      if (isConnected){
+      if (isConnected) {
         window.location.href = '/home';
       } 
     }
@@ -23,7 +23,7 @@ export class AccessComponent implements OnInit {
 
   async connectWalletLanding() {
     this.smartContract.connectWallet().subscribe((isConnected) => {
-      if (isConnected){
+      if (isConnected) {
         window.location.href = '/landingpage';
       } 
     }

@@ -18,8 +18,8 @@ export class AppComponent {
 
   ngOnInit() : void {}
 
-  async createOrder(sellerAdress : string, price : string) : Promise<boolean> {
-    const tx = await this.smartContract.createOrder(sellerAdress, price);
-    return tx;
-  }
+  // async createOrder(sellerAdress : string, price : string) : Promise<boolean> {
+  //   const tx = await this.smartContract.createOrder(sellerAdress, price);
+  //   return tx;
+  // }
 }

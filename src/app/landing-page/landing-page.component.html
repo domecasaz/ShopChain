@@ -1,6 +1,57 @@
-<label for="price">Price: </label>
-<input type="number" name="price" id="price" [formControl]="price">
-<label for="sellerAddress">Seller Address: </label>
-<input type="text" name="seller" id="seller" [formControl]="sellerAddress">
+<div *ngIf="!rightChain; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <app-switch-network></app-switch-network>
+</ng-template>
+<!-- <ng-template #elseBlock>
+    <app-header></app-header>
 
-<button (click)="createOrder()">Create Order</button>
+    <form [formGroup]="order" (ngSubmit)="createOrder()">
+        <label for="price">Price: </label>
+        <input type="number" name="price" id="Price" formControlName="price">
+
+        <br>
+
+        <label for="sellerAddress">Seller Address: </label>
+        <input type="text" name="sellerAddress" id="sellerAddress" formControlName="sellerAddress">
+
+        <button type="submit" [disabled]="order.invalid">submit</button>
+    </form>
+
+    <div *ngIf="price.errors?.['required'] && price.touched">
+        <p>Compila i campi</p>
+    </div>
+    <div *ngIf="price.errors?.['min']  && price.touched">
+        <p>Prezzo troppo basso</p>
+    </div>
+    <div *ngIf="sellerAddress.errors?.['isAddress']  && sellerAddress.touched">
+        <p>Indirizzo non valido</p>
+    </div>
+
+    <div *ngIf="isLoading">
+        <p>Loading...</p>
+    </div>
+    <div *ngIf="txConfirmed">
+        <p>Transaction confirmed</p>
+    </div>
+</ng-template> -->
+<ng-template #elseBlock>
+    <app-header></app-header>
+
+    <form [formGroup]="order" (ngSubmit)="createOrder()">
+        <mat-form-field appearance="fill">
+            <mat-label>Price: </mat-label>
+            <input type="number" name="price" id="price" matInput formControlName="price">
+            <mat-error *ngIf="price.errors?.['min']">Prezzo basso</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>sellerAddress: </mat-label>
+            <input type="text" name="sellerAddress" id="sellerAddress" matInput placeholder="Prova"
+                formControlName="sellerAddress">
+            <mat-error *ngIf="sellerAddress.touched && sellerAddress.errors?.['isAddress']">Indirizzo non valido
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit" [disabled]="order.invalid">submit</button>
+    </form>
+</ng-template>

@@ -23,23 +23,13 @@ export class OrdersComponent implements OnInit {
   constructor(private smartContract : SmartcontractService) {}
 
   async ngOnInit() : Promise<void> {
-    await this.smartContract.initializeContract();
-    await this.getOrders();
+    await this.smartContract.setCurrentAddress();
+    this.getOrders();
     await this.getOrderById();
   }
 
-  async getOrders() : Promise<void> {
-    const orders = await this.smartContract.getOrdersOfUser();
-    orders.map((element : any) => {
-      var order : Order = {
-        id: element[0],
-        buyerAddress: element[1].toString(),
-        sellerAddress: element[2].toString(),
-        amount: Number(ethers.utils.formatEther(element[3].toString())),
-        state: State[element[4]],
-      }
-      this.orders.push(order);
-    });
+  getOrders() : void {
+    this.orders = this.smartContract.getOrdersOfUser();
   }
 
   async getOrderById() {
