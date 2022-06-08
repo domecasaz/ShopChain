@@ -54,4 +54,11 @@
         <br>
         <button mat-raised-button color="primary" type="submit" [disabled]="order.invalid">submit</button>
     </form>
+
+    <div *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="txConfirmed">
+        <p>Transaction confirmed</p>
+    </div>
 </ng-template>
