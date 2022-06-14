@@ -1,0 +1,22 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #b3bcc9;
+    width: 100%;
+}
+
+.header h1 {
+    padding: 0.5em;
+}
+
+.navigation {
+    margin-left: 5em;
+}
+
+.navigation li {
+    padding: 0.5em;
+    list-style-type: none;
+}

@@ -1,0 +1,22 @@
+.orderForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 8%;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 8%;
+  align-items: center;
+}
+
+.txConfirmed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

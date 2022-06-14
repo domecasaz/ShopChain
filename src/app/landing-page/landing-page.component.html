@@ -1,0 +1,73 @@
+<div *ngIf="!rightChain; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <app-switch-network></app-switch-network>
+</ng-template>
+
+<ng-template #elseBlock>
+    <app-header></app-header>
+
+    <div class="orderForm">
+        <form [formGroup]="order" (ngSubmit)="createOrder()">
+            <mat-form-field appearance="fill">
+                <mat-label>Prezzo: </mat-label>
+                <input type="number" name="price" id="price" matInput formControlName="price">
+                <mat-error *ngIf="price.errors?.['min']">Prezzo basso</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Indirizzo Venditore: </mat-label>
+                <input type="text" name="sellerAddress" id="sellerAddress" matInput placeholder="Prova"
+                    formControlName="sellerAddress">
+                <mat-error *ngIf="sellerAddress.touched && sellerAddress.errors?.['isAddress']">Indirizzo non valido
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="primary" type="submit" [disabled]="order.invalid">Crea Ordine</button>
+        </form>
+    </div>
+
+    <div class="info">
+        <div *ngIf="isLoading" class="loading">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div *ngIf="txConfirmed" class="txConfirmed">
+            <p>Transazione confermata.</p>
+            <p><a href="/home">Clicca qui</a> per visualizzare i tuoi ordini.</p>
+        </div>
+    </div>
+    
+</ng-template>
+
+
+<!-- <ng-template #elseBlock>   
+    <app-header></app-header>   
+
+    <form [formGroup]="order" (ngSubmit)="createOrder()">
+        <label for="price">Price: </label>
+        <input type="number" name="price" id="Price" formControlName="price">
+
+        <br>
+
+        <label for="sellerAddress">Seller Address: </label>
+        <input type="text" name="sellerAddress" id="sellerAddress" formControlName="sellerAddress">
+
+        <button type="submit" [disabled]="order.invalid">submit</button>
+    </form>
+
+    <div *ngIf="price.errors?.['required'] && price.touched">
+        <p>Compila i campi</p>
+    </div>
+    <div *ngIf="price.errors?.['min']  && price.touched">
+        <p>Prezzo troppo basso</p>
+    </div>
+    <div *ngIf="sellerAddress.errors?.['isAddress']  && sellerAddress.touched">
+        <p>Indirizzo non valido</p>
+    </div>
+
+    <div *ngIf="isLoading">
+        <p>Loading...</p>
+    </div>
+    <div *ngIf="txConfirmed">
+        <p>Transaction confirmed</p>
+    </div>
+</ng-template> -->

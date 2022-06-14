@@ -1,0 +1,8 @@
+<div *ngIf="!rightChain; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <app-switch-network></app-switch-network>
+</ng-template>
+<ng-template #elseBlock>
+    <app-header></app-header>
+    <app-orders></app-orders>
+</ng-template>

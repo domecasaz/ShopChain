@@ -1,6 +1,9 @@
-declare let window: any;
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SmartcontractService } from './smartcontract.service';
+
+function getNetwork() : any {
+  return window;
+}
 
 @Component({
   selector: 'app-root',
@@ -9,16 +12,14 @@ import { SmartcontractService } from './smartcontract.service';
 })
 export class AppComponent {
   title = 'ShopChain';
-  public tx: any;
+  public tx : any;
 
   constructor(private smartContract: SmartcontractService) {}
 
-  async ngOnInit(): Promise<void>{
-  
-    this.smartContract.initializeContract();
-  }
+  ngOnInit() : void {}
 
-  async registerSeller() : Promise<any> {
-    this.tx = await this.smartContract.registerSeller();
-  }
+  // async createOrder(sellerAdress : string, price : string) : Promise<boolean> {
+  //   const tx = await this.smartContract.createOrder(sellerAdress, price);
+  //   return tx;
+  // }
 }

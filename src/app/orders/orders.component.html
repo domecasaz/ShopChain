@@ -1,0 +1,63 @@
+<div>
+    <form [formGroup]="filters" (ngSubmit)="filterOrders()">
+        <mat-form-field appearance="fill">
+            <mat-label>State: </mat-label>
+            <mat-select formControlName="state">
+                <mat-option *ngFor="let state of stateList" [value]="state">{{state}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>sellerAddress: </mat-label>
+            <input type="text" name="sellerAddress" id="sellerAddress" matInput placeholder="Prova"
+                formControlName="sellerAddress">
+            <mat-error *ngIf="sellerAddress.touched && sellerAddress.errors?.['isAddress']">Indirizzo non valido
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Applica Filtri</button>
+        <button mat-raised-button color="primary" type="button" (click)="resetFilters()">Reset Filtri</button>
+    </form>
+</div>
+
+<div class="orders">
+    <h2>Orders:</h2>
+    <table class="mat-elevation-z8 ordersTable">
+        <thead>
+            <tr>
+                <th>ID:</th>
+                <th>Indirizzo Venditore:</th>
+                <th>Prezzo:</th>
+                <th>Stato:</th>
+                <th>Operazioni:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of ordersToDisplay">
+                <td>{{order.id}}</td>
+                <td>{{order.sellerAddress}}</td>
+                <td>{{order.amount}}</td>
+                <td>{{order.state}}</td>
+                <td>
+                    <div *ngIf="order.state === 'Created' || order.state === 'Shipped' || order.state === 'Confirmed'; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <button mat-raised-button color="primary" type="button" (click)="askRefund(order.id)">Ask refund</button>
+                    </ng-template>
+                        
+                    <ng-template #elseBlock>No operations available</ng-template>                    
+
+
+                    <!-- <div>
+                        <button (click)="askRefund(order.id)">Ask refund</button>
+                        <button (click)="confirmOrder(order.id)">confirmOrderd</button>
+                        <button (click)="deleteOrder(order.id)">deleteOrder</button>
+                        <button (click)="shipOrder(order.id)">shipOrder</button>
+                        <button (click)="refundBuyer(order.id, order.amount)">refundBuyer</button>
+                    </div> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- 
+<app-table [orders]="orders"></app-table> -->

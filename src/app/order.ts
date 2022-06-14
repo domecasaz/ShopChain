@@ -1,16 +1,16 @@
 export interface Order {
     id: number;
-    buyerAddress: String;
-    sellerAddress: String;
+    buyerAddress: string;
+    sellerAddress: string;
     amount: number;
-    state: String;
+    state: string;
 }
 
 export enum State {
-    created,
-	shipped,
-	confirmed,
-	deleted,
-	refundAsked,
-	refunded
+    Created,
+	Shipped,
+	Confirmed,
+	Deleted,
+	RefundAsked,
+	Refunded
 }
