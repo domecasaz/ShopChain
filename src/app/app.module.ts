@@ -11,11 +11,14 @@ import { SwitchNetworkComponent } from './switch-network/switch-network.componen
 import { AccessComponent } from './access/access.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TableComponent } from './table/table.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     SwitchNetworkComponent,
     AccessComponent,
     LandingPageComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

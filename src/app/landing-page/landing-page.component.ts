@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { addressValidator } from '../addressValidator';
 import { SmartcontractService } from '../smartcontract.service';
 
@@ -11,7 +11,7 @@ import { SmartcontractService } from '../smartcontract.service';
 
 export class LandingPageComponent implements OnInit {
 
-  constructor(private smartContract : SmartcontractService, private formBuilder : FormBuilder) {}
+  constructor(private smartContract : SmartcontractService) {}
 
   public rightChain : boolean = true;
   public isLoading : boolean = false;

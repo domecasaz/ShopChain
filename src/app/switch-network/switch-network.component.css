@@ -1,0 +1,15 @@
+.switch {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.switch h1 {
+    font-weight: bold;
+}
+
+.switch button {
+    margin-top: 5%;
+}

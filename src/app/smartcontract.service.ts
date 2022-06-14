@@ -145,4 +145,23 @@ export class SmartcontractService {
   public async askRefund(id : number) : Promise<void> {
     await SmartcontractService.smartContract.askRefund(id);
   }
+
+
+
+  // public async shipOrder(id : number) : Promise<void> {
+  //   await SmartcontractService.smartContract.shipOrder(id);
+  // }
+
+  // public async confirmOrder(id : number) : Promise<void> {
+  //   await SmartcontractService.smartContract.confirmOrder(id);
+  // }
+
+  // public async deleteOrder(id : number) : Promise<void> {
+  //   await SmartcontractService.smartContract.deleteOrder(id);
+  // }
+
+  // public async refundBuyer(id : number, amount : number) : Promise<void> {
+  //   console.log(ethers.utils.parseEther(amount.toString()))
+  //   await SmartcontractService.smartContract.refundBuyer(id, ethers.utils.parseEther(amount.toString()));
+  // }
 }

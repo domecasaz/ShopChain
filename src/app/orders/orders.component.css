@@ -1,0 +1,30 @@
+.mat-form-field {
+    margin: 4%;
+}
+
+form button {
+    margin: 4%;
+}
+
+.orders {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding-bottom: 5%;
+}
+
+table, td, th {
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.ordersTable td, .ordersTable th {
+    padding: 1em;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
