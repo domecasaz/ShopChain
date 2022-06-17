@@ -14,7 +14,6 @@ export class OrdersComponent implements OnInit {
   orders : Order[] = [];
   ordersToDisplay : Order[] = [];
   stateList : string[] = ["Created",	"Shipped", "Confirmed", "Deleted", "RefundAsked", "Refunded"];
-
   
   filters : FormGroup = new FormGroup({
     state: new FormControl(""),
@@ -33,10 +32,6 @@ export class OrdersComponent implements OnInit {
   getOrders() : void {
     this.orders = this.smartContract.getOrdersOfUser();
     this.ordersToDisplay = this.orders;
-  }
-
-  async askRefund(id : number) {
-    await this.smartContract.askRefund(id);
   }
 
   get state() : any { return this.filters.get('state'); }
@@ -70,18 +65,4 @@ export class OrdersComponent implements OnInit {
   resetFilters() : void {
     this.ordersToDisplay = this.orders;
   }
-
-  // async confirmOrder(id : number) {
-  //   await this.smartContract.confirmOrder(id);
-  // }
-  // async deleteOrder(id : number) {
-  //   await this.smartContract.deleteOrder(id);
-  // }
-  // async shipOrder(id : number) {
-  //   await this.smartContract.shipOrder(id);
-  // }
-
-  // async refundBuyer(id : number, amount : number) {
-  //   await this.smartContract.refundBuyer(id, amount);
-  // }
 }

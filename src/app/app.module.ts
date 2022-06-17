@@ -19,6 +19,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { OrderInfoComponent } from './order-info/order-info.component';
+import { EcommerceComponent } from './ecommerce/ecommerce.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,8 @@ import { MatTableModule } from '@angular/material/table';
     AccessComponent,
     LandingPageComponent,
     TableComponent,
+    OrderInfoComponent,
+    EcommerceComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +48,8 @@ import { MatTableModule } from '@angular/material/table';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatTableModule,
+    MatToolbarModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

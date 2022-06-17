@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { addressValidator } from '../addressValidator';
+import { ActivatedRoute } from '@angular/router';
 import { SmartcontractService } from '../smartcontract.service';
 
 @Component({
@@ -11,44 +10,52 @@ import { SmartcontractService } from '../smartcontract.service';
 
 export class LandingPageComponent implements OnInit {
 
-  constructor(private smartContract : SmartcontractService) {}
+  constructor(
+    private smartContract : SmartcontractService,
+    private route : ActivatedRoute,
+  ) {}
 
   public rightChain : boolean = true;
   public isLoading : boolean = false;
   public txConfirmed : boolean = false;
- 
-  order : FormGroup = new FormGroup({
-    price: new FormControl(0, [
-      Validators.required,
-      Validators.min(0.0000001)
-    ]),
-    sellerAddress: new FormControl("", [
-      Validators.required,
-      addressValidator()
-    ])
-  });
+  public isConnected : boolean = false;
+  public order : any = "";
 
   ngOnInit() : void {
-    this.smartContract.connectWallet().subscribe((isConnected) => {
-      if (isConnected) {
-        if (this.smartContract.isRightChain()) {
-          this.smartContract.listenerNetworkChange();
-          this.smartContract.listenerAccountChange();
-          this.rightChain = true;
-        } else {
-          this.rightChain = false;
-          throw new Error("Please connect to Fuji testnet");
-        }
-      }
-    });
+    if (this.smartContract.isRightChain()) {
+      this.smartContract.listenerNetworkChange();
+      this.smartContract.listenerAccountChange();
+      this.rightChain = true;
+    } else {
+      this.rightChain = false;
+    }
+    this.fetchOrder();
   }
 
-  get price() : any { return this.order.get('price'); }
-  get sellerAddress() : any { return this.order.get('sellerAddress'); }
+  setConnection(value : boolean) : void {
+    this.isConnected = value;
+  }
 
-  async createOrder() {
-    if (await this.smartContract.createOrder(this.order.value.sellerAddress, this.order.value.price.toString(), () => {this.isLoading = true})){
-      this.order.reset();
+  fetchOrder() : void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const fetchUrl = "http://localhost:8000/orders/" + id;
+    const abortContr = new AbortController();
+    fetch(fetchUrl, {
+      signal: abortContr.signal
+    }).then(async res => {
+      if (res.ok) {
+        this.order = await res.json();
+        console.log(this.order)
+      }
+    })
+  }
+
+  toHome() : void {
+    window.location.href = "/home";
+  }
+
+  async createOrder() : Promise<void> {
+    if (await this.smartContract.createOrder(this.order.sellerAddress, this.order.price.toString(), () => {this.isLoading = true})){
       this.isLoading = false;
       this.txConfirmed = true;
     }

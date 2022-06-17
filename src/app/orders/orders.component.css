@@ -4,6 +4,23 @@
 
 form button {
     margin: 4%;
+    min-width: 25%;
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 2%;
+}
+
+.filters form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .orders {
@@ -27,4 +44,26 @@ table, td, th {
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+.state {
+    font-weight: bold;
+}
+.Created {
+    color: #29ab27;
+}
+.Deleted {
+    color: #eb4034;
+}
+.Shipped {
+    color: #a69728;
+}
+.RefundAsked {
+    color: #c95918;
+}
+.Refunded {
+    color: #6112b5;
+}
+.Confirmed {
+    color: #1311a8;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SmartcontractService } from '../smartcontract.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { SmartcontractService } from '../smartcontract.service';
   styleUrls: ['./access.component.css']
 })
 export class AccessComponent implements OnInit {
+
+  @Output() itemEvent = new EventEmitter<boolean>();
 
   constructor(private smartContract : SmartcontractService) {}
 
@@ -24,7 +26,8 @@ export class AccessComponent implements OnInit {
   async connectWalletLanding() {
     this.smartContract.connectWallet().subscribe((isConnected) => {
       if (isConnected) {
-        window.location.href = '/landingpage';
+        this.itemEvent.emit(true);
+        //window.location.href = '/landingpage';
       } 
     }
     );

@@ -14,6 +14,6 @@ export class SwitchNetworkComponent implements OnInit {
 
   async changeNetwork() : Promise<any> {
     await this.smartContract.changeNetwork();
+    window.location.reload();
   }
-
 }

@@ -93,8 +93,20 @@ export class SmartcontractService {
     return orders;
   }
   
-  public async getOrderById(id : number) : Promise<any> {
-    return await SmartcontractService.smartContract.getOrder(id);
+  public async getOrderById(id : number) : Promise<Order> {
+    let tmp = await SmartcontractService.smartContract.getOrder(id);
+    let order : Order = {
+      id: Number(tmp[0]),
+      buyerAddress: tmp[1].toString(),
+      sellerAddress: tmp[2].toString(),
+      amount: Number(ethers.utils.formatEther(tmp[3].toString())),
+      state: State[tmp[4]],
+    }
+    return order;
+  }
+
+  public async getLog(id : number) : Promise<any> {
+    return await SmartcontractService.smartContract.getLogsOfOrder(id);
   }
 
   public async createOrder(sellerAddress : string, price : string, func : Function) : Promise<boolean> {
@@ -130,7 +142,6 @@ export class SmartcontractService {
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: SmartcontractService.chainId }],
       });
-      window.location.reload();
     } catch (error : any) {
       console.log(error);
       if (error.code === 4902) {
@@ -142,12 +153,15 @@ export class SmartcontractService {
     }
   }
 
-  public async askRefund(id : number) : Promise<void> {
-    await SmartcontractService.smartContract.askRefund(id);
+  public async askRefund(id : number, func : Function) : Promise<boolean> {
+    func();
+    const transaction = await SmartcontractService.smartContract.askRefund(id);
+    const tx = await transaction.wait();
+    return tx.status === 1;
   }
 
 
-
+  //  OPERAZIONI VENDITORE
   // public async shipOrder(id : number) : Promise<void> {
   //   await SmartcontractService.smartContract.shipOrder(id);
   // }

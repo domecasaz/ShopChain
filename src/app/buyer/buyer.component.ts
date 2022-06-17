@@ -20,7 +20,6 @@ export class BuyerComponent implements OnInit {
           this.rightChain = true;
         } else {
           this.rightChain = false;
-          throw new Error("Please connect to Fuji testnet");
         }
       }
     }
