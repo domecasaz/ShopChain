@@ -8,6 +8,11 @@ table, td, th {
     padding: 1em;
 }
 
+.logsTable td, .logsTable th {
+    padding-block: 1em;
+    padding-inline: 2em;
+}
+
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
@@ -18,9 +23,35 @@ tr:nth-child(even) {
     justify-content: center;
     align-items: center;
     width: auto;
-    padding-top: 7%;
+    padding-top: 5%;
 }
 
 .loading {
     margin-inline: 38%;
+}
+
+.logsTable {
+    margin-top: 5%;
+}
+
+.state {
+    font-weight: bold;
+}
+.Created {
+    color: #29ab27;
+}
+.Deleted {
+    color: #eb4034;
+}
+.Shipped {
+    color: #a69728;
+}
+.RefundAsked {
+    color: #c95918;
+}
+.Refunded {
+    color: #6112b5;
+}
+.Confirmed {
+    color: #1311a8;
 }

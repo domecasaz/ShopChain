@@ -1,22 +1,22 @@
 <div class="filters">
     <form [formGroup]="filters" (ngSubmit)="filterOrders()">
         <mat-form-field appearance="fill">
-            <mat-label>State: </mat-label>
+            <mat-label>Stato: </mat-label>
             <mat-select formControlName="state">
                 <mat-option *ngFor="let state of stateList" [value]="state">{{state}}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>sellerAddress: </mat-label>
-            <input type="text" name="sellerAddress" id="sellerAddress" matInput placeholder="Prova"
+            <mat-label>Indirizzo Venditore: </mat-label>
+            <input type="text" name="sellerAddress" id="sellerAddress" matInput placeholder="Es. 0xEbDC67e05348AB26BF1a5662B3C7129BE08a601f"
                 formControlName="sellerAddress">
             <mat-error *ngIf="sellerAddress.touched && sellerAddress.errors?.['isAddress']">Indirizzo non valido
             </mat-error>
         </mat-form-field>
 
         <button mat-raised-button color="primary" type="submit">Applica Filtri</button>
-        <button mat-raised-button color="primary" type="button" (click)="resetFilters()">Reset Filtri</button>
+        <button mat-raised-button color="accent" type="button" (click)="resetFilters()">Reset Filtri</button>
     </form>
 </div>
 
@@ -38,7 +38,7 @@
                 <td> {{order.sellerAddress}} </td>
                 <td> {{order.amount}} </td>
                 <td ngClass="{{order.state}} state"> {{order.state}} </td>
-                <td> <a routerLink="/info/{{order.id}}">Vedi Dettagli</a> </td>
+                <td> <button mat-raised-button color="primary" type="button" (click)="toOrderInfo(order.id)">Vedi Dettagli</button> </td>
             </tr>
         </tbody>
     </table>

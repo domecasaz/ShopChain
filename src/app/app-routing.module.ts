@@ -9,11 +9,11 @@ import { EcommerceComponent } from './ecommerce/ecommerce.component';
 
 const routes : Routes = [
   { path: 'ecommerce', component: EcommerceComponent },
-  { path: 'autentication', component: AccessComponent },
   { path: 'home', component: BuyerComponent },
   { path: 'landingpage/:id', component: LandingPageComponent },
   { path: 'info/:id', component: OrderInfoComponent },
-  { path: '', redirectTo: '/ecommerce', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'autentication', component: AccessComponent },
 ];
 @NgModule({
   declarations: [],

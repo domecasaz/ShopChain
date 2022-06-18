@@ -3,13 +3,14 @@
 }
 .title {
     padding-top: 60px;
+    padding-left: 30px;
 }
 a {
     color: white;
 }
 a:visited {
-    color: #e612d4;
+    color: #FF4081;
 }
 .link a {
-    padding-inline: 3%;
+    padding-inline: 0.5em;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SmartcontractService } from '../smartcontract.service';
 import { Order } from '../order';
+import { Log } from '../log';
 
 @Component({
   selector: 'app-order-info',
@@ -12,7 +13,7 @@ export class OrderInfoComponent implements OnInit {
 
   public isLoading : boolean = false;
   public order : Order = {id:1, sellerAddress:"", buyerAddress:"", amount:0, state:""};
-  
+  public logs : Log[] = [];
   constructor(
     private smartContract : SmartcontractService,
     private route : ActivatedRoute,
@@ -21,6 +22,7 @@ export class OrderInfoComponent implements OnInit {
 
   async ngOnInit() : Promise<void> {
     await this.getOrder();
+    this.getLog(this.order.id)
   }
 
   async getOrder() : Promise<void> {
@@ -35,6 +37,11 @@ export class OrderInfoComponent implements OnInit {
       }, 1500);
       this.isLoading = false;
     }
+  }
+
+  getLog(id : number) : void {
+    this.logs = this.smartContract.getLog(id);
+    console.log(this.smartContract.getLog(id))
   }
 
   

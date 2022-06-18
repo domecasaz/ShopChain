@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <th>Stato: </th>
-                <td>{{order.state}}</td>
+                <td ngClass="{{order.state}} state">{{order.state}}</td>
             </tr>
             <tr>
                 <th>Operazioni: </th>
@@ -44,6 +44,21 @@
                         <button (click)="refundBuyer(order.id, order.amount)">refundBuyer</button>
                     </div> -->
                 </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="mat-elevation-z8 logsTable">
+        <thead>
+            <tr>
+                <th>Stato: </th>
+                <th>Data e ora: </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let log of logs">
+                <td ngClass="{{log.state}} state">{{log.state}}</td>
+                <td>{{log.date}}</td>
             </tr>
         </tbody>
     </table>

@@ -22,7 +22,6 @@ export class BuyerComponent implements OnInit {
           this.rightChain = false;
         }
       }
-    }
-    );
+    });
   }
 }

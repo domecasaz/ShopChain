@@ -4,6 +4,7 @@ import contract from '../../contracts/ShopChain.json';
 import { Order, State } from './order';
 import detectEthereumProvider from "@metamask/detect-provider";
 import { from, Observable, Observer, switchMap } from 'rxjs';
+import { Log } from './log';
 
 @Injectable({
   providedIn: 'root'
@@ -105,8 +106,19 @@ export class SmartcontractService {
     return order;
   }
 
-  public async getLog(id : number) : Promise<any> {
-    return await SmartcontractService.smartContract.getLogsOfOrder(id);
+  public getLog(id : number) : Log[] {
+    let logs : Log[] = [];
+    SmartcontractService.smartContract.getLogsOfOrder(id)
+    .then((res : any) => {
+      res.map((element : any) => {
+        var log : Log = {
+          state: State[element[0]],
+          date: new Date(parseInt(element[1].toString())*1000).toLocaleString(),
+        }
+        logs.push(log);
+      })
+    })
+    return logs;
   }
 
   public async createOrder(sellerAddress : string, price : string, func : Function) : Promise<boolean> {
