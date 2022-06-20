@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
-import contract from '../../contracts/ShopChain.json';
-import { Order, State } from './order';
+import contract from '../../../contracts/ShopChain.json';
+import { Order, State } from './../order';
+import { Log } from './../log';
 import detectEthereumProvider from "@metamask/detect-provider";
-import { from, Observable, Observer, switchMap } from 'rxjs';
-import { Log } from './log';
+import { from, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -165,11 +165,16 @@ export class SmartcontractService {
     }
   }
 
-  public async askRefund(id : number, func : Function) : Promise<boolean> {
+   public async askRefund(id : number, func : Function) : Promise<any> {
     func();
-    const transaction = await SmartcontractService.smartContract.askRefund(id);
+    try {
+      const transaction = await SmartcontractService.smartContract.askRefund(id)
     const tx = await transaction.wait();
     return tx.status === 1;
+    } catch(err) {
+      return false;
+    }
+    
   }
 
 

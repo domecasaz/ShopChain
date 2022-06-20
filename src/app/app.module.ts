@@ -4,15 +4,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { OrdersComponent } from './orders/orders.component';
-import { BuyerComponent } from './buyer/buyer.component';
-import { HeaderComponent } from './header/header.component';
-import { SwitchNetworkComponent } from './switch-network/switch-network.component';
-import { AccessComponent } from './access/access.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { TableComponent } from './table/table.component';
-import { OrderInfoComponent } from './order-info/order-info.component';
-import { EcommerceComponent } from './ecommerce/ecommerce.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { BuyerComponent } from './components/buyer/buyer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SwitchNetworkComponent } from './components/switch-network/switch-network.component';
+import { AccessComponent } from './components/access/access.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { TableComponent } from './components/table/table.component';
+import { OrderInfoComponent } from './components/order-info/order-info.component';
+import { EcommerceComponent } from './components/ecommerce/ecommerce.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

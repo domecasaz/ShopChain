@@ -30,6 +30,10 @@ tr:nth-child(even) {
     margin-inline: 38%;
 }
 
+.logs {
+    padding-block: 2%;
+}
+
 .logsTable {
     margin-top: 5%;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { SmartcontractService } from '../smartcontract.service';
+import { SmartcontractService } from '../../services/smartcontract.service';
 
 @Component({
   selector: 'app-access',

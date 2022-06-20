@@ -1,0 +1,59 @@
+<div *ngIf="!isHisOrder; then thenBlock2 else elseBlock2"></div>
+<ng-template #thenBlock2>
+    <div class="error">
+        <mat-error>Questo ordine non non è stato effettuato dal wallet con cui sei connesso!</mat-error>
+        <br>
+        <mat-error>Controlla di essere collegato al wallet corretto oppure <a routerLink="/ecommerce"> ritorna all'e-commerce</a> e inserisci il wallet giusto.</mat-error>
+    </div>
+
+</ng-template>
+
+<ng-template #elseBlock2>
+    <div *ngIf="!isConnected; then thenBlock1 else elseBlock1"></div>
+    <ng-template #thenBlock1>
+        <app-access (itemEvent)="hasConnected()"></app-access>
+    </ng-template>
+
+    <ng-template #elseBlock1>
+
+        <div *ngIf="!rightChain; then thenBlock3 else elseBlock3"></div>
+        <ng-template #thenBlock3>
+            <app-switch-network></app-switch-network>
+        </ng-template>
+
+        <ng-template #elseBlock3>
+            <app-header></app-header>
+
+            <div class="info">
+                <mat-card class="card">
+                    <mat-card-header>
+                        <mat-card-title>Indirizzo Venditore: </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{this.order.sellerAddress}}</p>
+                    </mat-card-content>
+
+                    <mat-card-header>
+                        <mat-card-title>Totale da pagare: </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{this.order.price}}</p>
+                    </mat-card-content>
+                </mat-card>
+
+                <button mat-raised-button color="primary" type="button" (click)="createOrder()">Crea Ordine</button>
+            </div>
+
+            <div class="info">
+                <div *ngIf="isLoading" class="loading">
+                    <mat-spinner></mat-spinner>
+                </div>
+                <div *ngIf="txConfirmed" class="txConfirmed">
+                    <p>Transazione confermata.</p>
+                    <p><button mat-raised-button color="primary" type="button" (click)="toHome()">Clicca qui</button>
+                        per visualizzare i tuoi ordini.</p>
+                </div>
+            </div>
+        </ng-template>
+    </ng-template>
+</ng-template>

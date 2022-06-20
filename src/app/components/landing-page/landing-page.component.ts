@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SmartcontractService } from '../smartcontract.service';
+import { SmartcontractService } from '../../services/smartcontract.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -19,24 +19,44 @@ export class LandingPageComponent implements OnInit {
   public isLoading : boolean = false;
   public txConfirmed : boolean = false;
   public isConnected : boolean = false;
+  public isHisOrder : boolean = true;
   public order : any = "";
 
-  ngOnInit() : void {
+  async ngOnInit() {
+    await this.fetchOrder();
     if (this.smartContract.isRightChain()) {
+      await this.smartContract.setCurrentAddress();
       this.smartContract.listenerNetworkChange();
       this.smartContract.listenerAccountChange();
       this.rightChain = true;
+      this.isConnected = this.setIsConnected();
     } else {
       this.rightChain = false;
     }
-    this.fetchOrder();
+
+    setTimeout(() => {
+      console.log(SmartcontractService.currentAddress[0].toLowerCase())
+      console.log(this.order.buyerAddress.toLowerCase())
+
+      if (this.order.buyerAddress && this.order.buyerAddress.toLowerCase() !== SmartcontractService.currentAddress[0].toLowerCase()) {
+        console.log("qui")
+        this.isHisOrder = false;
+      }
+
+      console.log(this.isHisOrder)
+    }, 750);    
   }
 
-  setConnection(value : boolean) : void {
-    this.isConnected = value;
+  setIsConnected() : boolean {
+    return SmartcontractService.currentAddress[0] !== undefined;
   }
 
-  fetchOrder() : void {
+  hasConnected() : void {
+    this.isConnected = true;
+    window.location.reload();
+  }
+
+  async fetchOrder() : Promise<void> {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     const fetchUrl = "http://localhost:8000/orders/" + id;
     const abortContr = new AbortController();

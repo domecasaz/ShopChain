@@ -1,7 +1,7 @@
 import { Component, AfterContentInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Order } from '../order';
-import { SmartcontractService } from '../smartcontract.service';
+import { Order } from '../../order';
+import { SmartcontractService } from '../../services/smartcontract.service';
 
 export interface PeriodicElement {
   name: string;

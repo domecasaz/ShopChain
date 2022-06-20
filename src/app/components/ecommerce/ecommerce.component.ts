@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { addressValidator } from '../addressValidator';
+import { addressValidator } from '../../addressValidator';
 
 
 @Component({

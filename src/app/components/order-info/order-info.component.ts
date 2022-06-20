@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SmartcontractService } from '../smartcontract.service';
-import { Order } from '../order';
-import { Log } from '../log';
+import { SmartcontractService } from '../../services/smartcontract.service';
+import { Order } from '../../order';
+import { Log } from '../../log';
 
 @Component({
   selector: 'app-order-info',
@@ -14,6 +14,7 @@ export class OrderInfoComponent implements OnInit {
   public isLoading : boolean = false;
   public order : Order = {id:1, sellerAddress:"", buyerAddress:"", amount:0, state:""};
   public logs : Log[] = [];
+  public txDeniend : boolean = false;
   constructor(
     private smartContract : SmartcontractService,
     private route : ActivatedRoute,
@@ -36,17 +37,20 @@ export class OrderInfoComponent implements OnInit {
         window.location.reload();
       }, 1500);
       this.isLoading = false;
+    } else {
+      this.isLoading = false;
+      this.txDeniend = true;
     }
   }
 
   getLog(id : number) : void {
     this.logs = this.smartContract.getLog(id);
-    console.log(this.smartContract.getLog(id))
   }
 
   
 
   // async confirmOrder(id : number) {
+  //   console.log(id)
   //   await this.smartContract.confirmOrder(id);
   // }
   // async deleteOrder(id : number) {

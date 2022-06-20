@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import { addressValidator } from '../addressValidator';
-import { Order, State } from '../order';
-import { SmartcontractService } from '../smartcontract.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import { addressValidator } from '../../addressValidator';
+import { Order } from '../../order';
+import { SmartcontractService } from '../../services/smartcontract.service';
 
 @Component({
   selector: 'app-orders',
