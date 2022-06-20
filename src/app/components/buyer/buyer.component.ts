@@ -8,20 +8,28 @@ import { SmartcontractService } from '../../services/smartcontract.service';
 })
 export class BuyerComponent implements OnInit {
   public rightChain : boolean = true;
+  public isConnected : boolean = false;
 
   constructor(private smartContract : SmartcontractService) {}
 
   async ngOnInit() : Promise<void> {
-    this.smartContract.connectWallet().subscribe(async (isConnected) => {
-      if (isConnected) {
-        if (this.smartContract.isRightChain()) {
-          this.smartContract.listenerAccountChange();
-          this.smartContract.listenerNetworkChange();
-          this.rightChain = true;
-        } else {
-          this.rightChain = false;
-        }
-      }
-    });
+    if (this.smartContract.isRightChain()) {
+      await this.smartContract.setCurrentAddress();
+      this.smartContract.listenerNetworkChange();
+      this.smartContract.listenerAccountChange();
+      this.rightChain = true;
+      this.isConnected = this.setIsConnected();
+    } else {
+      this.rightChain = false;
+    }
+  }
+
+  setIsConnected() : boolean {
+    return SmartcontractService.currentAddress[0] !== undefined;
+  }
+
+  hasConnected() : void {
+    this.isConnected = true;
+    window.location.reload();
   }
 }

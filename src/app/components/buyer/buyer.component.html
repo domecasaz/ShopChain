@@ -1,8 +1,15 @@
-<div *ngIf="!rightChain; then thenBlock else elseBlock"></div>
-<ng-template #thenBlock>
-    <app-switch-network></app-switch-network>
+<div *ngIf="!isConnected; then thenBlock1 else elseBlock1"></div>
+<ng-template #thenBlock1>
+    <app-access (itemEvent)="hasConnected()"></app-access>
 </ng-template>
-<ng-template #elseBlock>
-    <app-header></app-header>
-    <app-orders></app-orders>
+
+<ng-template #elseBlock1>
+    <div *ngIf="!rightChain; then thenBlock2 else elseBlock2"></div>
+    <ng-template #thenBlock2>
+        <app-switch-network></app-switch-network>
+    </ng-template>
+    <ng-template #elseBlock2>
+        <app-header></app-header>
+        <app-orders></app-orders>
+    </ng-template>
 </ng-template>
