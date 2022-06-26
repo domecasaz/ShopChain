@@ -10,9 +10,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { SwitchNetworkComponent } from './components/switch-network/switch-network.component';
 import { AccessComponent } from './components/access/access.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { TableComponent } from './components/table/table.component';
 import { OrderInfoComponent } from './components/order-info/order-info.component';
 import { EcommerceComponent } from './components/ecommerce/ecommerce.component';
+import { LogComponent } from './components/log/log.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -33,9 +33,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SwitchNetworkComponent,
     AccessComponent,
     LandingPageComponent,
-    TableComponent,
     OrderInfoComponent,
     EcommerceComponent,
+    LogComponent,
   ],
   imports: [
     BrowserModule,

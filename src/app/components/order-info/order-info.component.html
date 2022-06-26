@@ -36,13 +36,14 @@
                             </ng-template>
 
                             <ng-template #elseBlock3>
-                                <button mat-raised-button color="primary" type="button" (click)="askRefund(order.id)">Ask refund</button>
+                                <button mat-raised-button color="primary" type="button" (click)="askRefund(order.id)">Chiedi Reso</button>
                             </ng-template>
                         </ng-template>
                         
                     </ng-template>
                         
-                    <ng-template #elseBlock1>Non è possibile eseguire nessuna operazione su questo ordine.</ng-template>
+                    <ng-template #elseBlock1>Non è possibile eseguire nessuna operazione su questo ordine.
+                    </ng-template>
                     <!-- <div>
                         <button mat-raised-button color="primary" type="button" (click)="askRefund(order.id)">Ask refund</button>
                         <button mat-raised-button color="primary" type="button" (click)="confirmOrder(order.id)">confirmOrder</button>
@@ -55,20 +56,5 @@
         </tbody>
     </table>
 
-    <div class="logs">
-        <table class="mat-elevation-z8 logsTable">
-            <thead>
-                <tr>
-                    <th>Stato: </th>
-                    <th>Data e ora: </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let log of logs">
-                    <td ngClass="{{log.state}} state">{{log.state}}</td>
-                    <td>{{log.date}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <app-log></app-log>
 </div>

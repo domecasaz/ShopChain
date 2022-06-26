@@ -18,14 +18,10 @@ export class BuyerComponent implements OnInit {
       this.smartContract.listenerNetworkChange();
       this.smartContract.listenerAccountChange();
       this.rightChain = true;
-      this.isConnected = this.setIsConnected();
+      this.isConnected = SmartcontractService.currentAddress[0] !== undefined;
     } else {
       this.rightChain = false;
     }
-  }
-
-  setIsConnected() : boolean {
-    return SmartcontractService.currentAddress[0] !== undefined;
   }
 
   hasConnected() : void {

@@ -29,31 +29,25 @@ export class LandingPageComponent implements OnInit {
       this.smartContract.listenerNetworkChange();
       this.smartContract.listenerAccountChange();
       this.rightChain = true;
-      this.isConnected = this.setIsConnected();
+      this.isConnected = SmartcontractService.currentAddress[0] !== undefined;
     } else {
       this.rightChain = false;
     }
 
     setTimeout(() => {
-      console.log(SmartcontractService.currentAddress[0].toLowerCase())
-      console.log(this.order.buyerAddress.toLowerCase())
-
       if (this.order.buyerAddress && this.order.buyerAddress.toLowerCase() !== SmartcontractService.currentAddress[0].toLowerCase()) {
-        console.log("qui")
         this.isHisOrder = false;
       }
-
-      console.log(this.isHisOrder)
     }, 750);    
-  }
-
-  setIsConnected() : boolean {
-    return SmartcontractService.currentAddress[0] !== undefined;
   }
 
   hasConnected() : void {
     this.isConnected = true;
     window.location.reload();
+  }
+
+  toHome() : void {
+    window.location.href = "/home";
   }
 
   async fetchOrder() : Promise<void> {
@@ -65,15 +59,10 @@ export class LandingPageComponent implements OnInit {
     }).then(async res => {
       if (res.ok) {
         this.order = await res.json();
-        console.log(this.order)
       }
     })
   }
-
-  toHome() : void {
-    window.location.href = "/home";
-  }
-
+  
   async createOrder() : Promise<void> {
     if (await this.smartContract.createOrder(this.order.sellerAddress, this.order.price.toString(), () => {this.isLoading = true})){
       this.isLoading = false;

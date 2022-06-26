@@ -1,16 +1,25 @@
 .spacer {
     flex: 1 1 auto;
 }
+
 .title {
-    padding-top: 60px;
+    padding-top: 125px;
     padding-left: 30px;
 }
+
 a {
     color: white;
 }
+
 a:visited {
     color: #FF4081;
 }
+
 .link a {
     padding-inline: 0.5em;
 }
+
+.logoAvax {
+    width: 8%;
+    margin-bottom: -5px;
+  }

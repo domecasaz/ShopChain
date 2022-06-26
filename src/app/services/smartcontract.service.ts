@@ -18,6 +18,7 @@ export class SmartcontractService {
   public static chainId : string = "0xa869";
   public static rightChain : boolean = true;
   public static smartContract : any = SmartcontractService.getContract();
+  public static balance : number = 0;
   constructor() {}
 
   private static async getWebProvider() {
@@ -45,34 +46,14 @@ export class SmartcontractService {
     );
   }
 
-  // async initializeContract() {
-  //   if(SmartcontractService.smartContract === undefined) {
-  //     SmartcontractService.smartContract = new ethers.Contract(
-  //       contract.contractAddress,
-  //       contract.abi,
-  //       SmartcontractService.provider.getSigner(),
-  //     );
-  //   }
-  //   SmartcontractService.currentAddress = await SmartcontractService.ethereum.request({ method: 'eth_requestAccounts' });
-  // }
-
   public isRightChain() : boolean {
     return SmartcontractService.ethereum.chainId === SmartcontractService.chainId;
   }
 
   public async setCurrentAddress() {
     SmartcontractService.currentAddress = await SmartcontractService.ethereum.request({ method: 'eth_requestAccounts' });
-  }
-  
-  public async registerSeller() : Promise<any> {
-    const transaction = await SmartcontractService.smartContract.registerAsSeller();
-    const tx = await transaction.wait();
-
-    return tx.status === 1;
-  }
-
-  public async getAllOrders() : Promise<any> {
-    return await SmartcontractService.smartContract.getOrders();
+    const balance = await SmartcontractService.provider.getBalance(SmartcontractService.currentAddress[0], "latest")
+    SmartcontractService.balance = Math.round(Number(ethers.utils.formatEther(balance)) * 1e4) / 1e4;
   }
 
   public getOrdersOfUser() : Order[] {
@@ -138,7 +119,6 @@ export class SmartcontractService {
 
   public listenerNetworkChange() : void {
     SmartcontractService.ethereum.on("chainChanged", () => {
-      console.log(SmartcontractService.ethereum.chainId);
       if (SmartcontractService.ethereum.chainId === SmartcontractService.chainId) {
         SmartcontractService.rightChain = true;
       } else {
@@ -169,16 +149,22 @@ export class SmartcontractService {
     func();
     try {
       const transaction = await SmartcontractService.smartContract.askRefund(id)
-    const tx = await transaction.wait();
-    return tx.status === 1;
+      const tx = await transaction.wait();
+      return tx.status === 1;
     } catch(err) {
       return false;
     }
-    
   }
 
 
   //  OPERAZIONI VENDITORE
+
+  // public async registerSeller() : Promise<any> {
+  //   const transaction = await SmartcontractService.smartContract.registerAsSeller();
+  //   const tx = await transaction.wait();
+
+  //   return tx.status === 1;
+  // }
   // public async shipOrder(id : number) : Promise<void> {
   //   await SmartcontractService.smartContract.shipOrder(id);
   // }
@@ -192,7 +178,6 @@ export class SmartcontractService {
   // }
 
   // public async refundBuyer(id : number, amount : number) : Promise<void> {
-  //   console.log(ethers.utils.parseEther(amount.toString()))
   //   await SmartcontractService.smartContract.refundBuyer(id, ethers.utils.parseEther(amount.toString()));
   // }
 }

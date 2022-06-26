@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   currentAddressShort : string = "";
   smartContractAdress : string = SmartcontractService.smartContractAddress;
   smartContractAdressShort : string = this.smartContractAdress.substring(0, 8) + "..." + this.smartContractAdress.substring(this.smartContractAdress.length-8, this.smartContractAdress.length);
+  balance : number = 0;
 
   constructor(private smartContract : SmartcontractService) {}
 
@@ -18,5 +19,6 @@ export class HeaderComponent implements OnInit {
     await this.smartContract.setCurrentAddress();
     this.currentAddress = SmartcontractService.currentAddress[0];
     this.currentAddressShort = this.currentAddress.substring(0, 8) + "..." + this.currentAddress.substring(this.currentAddress.length-8, this.currentAddress.length);
+    this.balance = SmartcontractService.balance;
   }
 }

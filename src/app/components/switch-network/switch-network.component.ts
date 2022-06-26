@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SmartcontractService } from '../../services/smartcontract.service';
 
 @Component({
@@ -6,11 +6,9 @@ import { SmartcontractService } from '../../services/smartcontract.service';
   templateUrl: './switch-network.component.html',
   styleUrls: ['./switch-network.component.css']
 })
-export class SwitchNetworkComponent implements OnInit {
+export class SwitchNetworkComponent {
 
   constructor(private smartContract : SmartcontractService) {}
-
-  ngOnInit() : void {}
 
   async changeNetwork() : Promise<any> {
     await this.smartContract.changeNetwork();

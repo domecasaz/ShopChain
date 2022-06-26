@@ -8,11 +8,6 @@ table, td, th {
     padding: 1em;
 }
 
-.logsTable td, .logsTable th {
-    padding-block: 1em;
-    padding-inline: 2em;
-}
-
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
@@ -28,14 +23,6 @@ tr:nth-child(even) {
 
 .loading {
     margin-inline: 38%;
-}
-
-.logs {
-    padding-block: 2%;
-}
-
-.logsTable {
-    margin-top: 5%;
 }
 
 .state {

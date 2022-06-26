@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { SmartcontractService } from '../../services/smartcontract.service';
 
 @Component({
@@ -6,13 +6,11 @@ import { SmartcontractService } from '../../services/smartcontract.service';
   templateUrl: './access.component.html',
   styleUrls: ['./access.component.css']
 })
-export class AccessComponent implements OnInit {
+export class AccessComponent{
 
   @Output() itemEvent = new EventEmitter<boolean>();
 
   constructor(private smartContract : SmartcontractService) {}
-
-  ngOnInit() : void {}
 
   async connectWallet() {
     this.smartContract.connectWallet().subscribe((isConnected) => {

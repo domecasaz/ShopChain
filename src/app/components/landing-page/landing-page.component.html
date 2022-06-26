@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div *ngIf="!isHisOrder; then thenBlock2 else elseBlock2"></div>
 <ng-template #thenBlock2>
     <div class="error">
@@ -22,7 +24,6 @@
         </ng-template>
 
         <ng-template #elseBlock3>
-            <app-header></app-header>
 
             <div class="info">
                 <mat-card class="card">
@@ -37,17 +38,20 @@
                         <mat-card-title>Totale da pagare: </mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                        <p>{{this.order.price}}</p>
+                        <p>{{this.order.price}} AVAX <img src="../../../assets/avaxLogo.png" alt="Logo AVAX" class="logoAvax"></p>
                     </mat-card-content>
                 </mat-card>
-
-                <button mat-raised-button color="primary" type="button" (click)="createOrder()">Crea Ordine</button>
             </div>
 
             <div class="info">
-                <div *ngIf="isLoading" class="loading">
+                <div *ngIf="isLoading; then thenBlock4 else elseBlock4"></div>
+                <ng-template #thenBlock4 class="loading">
                     <mat-spinner></mat-spinner>
-                </div>
+                </ng-template>
+                <ng-template #elseBlock4>
+                    <button mat-raised-button color="primary" type="button" (click)="createOrder()">Crea Ordine</button>
+                </ng-template>
+
                 <div *ngIf="txConfirmed" class="txConfirmed">
                     <p>Transazione confermata.</p>
                     <p><button mat-raised-button color="primary" type="button" (click)="toHome()">Clicca qui</button>
