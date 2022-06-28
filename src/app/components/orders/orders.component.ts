@@ -64,8 +64,4 @@ export class OrdersComponent implements OnInit {
   resetFilters() : void {
     this.ordersToDisplay = this.orders;
   }
-
-  toOrderInfo(id : number) : void {
-    window.location.href = "/info/" + id;
-  }
 }

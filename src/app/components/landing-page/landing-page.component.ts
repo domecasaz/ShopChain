@@ -46,10 +46,6 @@ export class LandingPageComponent implements OnInit {
     window.location.reload();
   }
 
-  toHome() : void {
-    window.location.href = "/home";
-  }
-
   async fetchOrder() : Promise<void> {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     const fetchUrl = "http://localhost:8000/orders/" + id;

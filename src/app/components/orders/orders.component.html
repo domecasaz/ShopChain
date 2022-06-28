@@ -16,7 +16,7 @@
         </mat-form-field>
 
         <button mat-raised-button color="primary" type="submit">Applica Filtri</button>
-        <button mat-raised-button color="accent" type="button" (click)="resetFilters()">Reset Filtri</button>
+        <button mat-raised-button type="button" class="reset" (click)="resetFilters()">Reset Filtri</button>
     </form>
 </div>
 
@@ -38,7 +38,7 @@
                 <td> {{order.sellerAddress}} </td>
                 <td> {{order.amount}} </td>
                 <td ngClass="{{order.state}} state"> {{order.state}} </td>
-                <td> <button mat-raised-button color="primary" type="button" (click)="toOrderInfo(order.id)">Vedi Dettagli</button> </td>
+                <td> <a mat-raised-button color="primary" type="button" href="/info/{{order.id}}">Vedi Dettagli</a> </td>
             </tr>
         </tbody>
     </table>

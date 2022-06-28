@@ -23,6 +23,11 @@ form button {
     align-items: center;
 }
 
+.reset {
+    color: #000;
+    background-color: #FAF200;
+}
+
 .orders {
     display: flex;
     flex-direction: column;

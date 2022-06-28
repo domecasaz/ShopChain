@@ -3,7 +3,7 @@
 }
 
 .title {
-    padding-top: 125px;
+    padding-top: 100px;
     padding-left: 30px;
 }
 
@@ -12,7 +12,7 @@ a {
 }
 
 a:visited {
-    color: #FF4081;
+    color: #FAF200;
 }
 
 .link a {
@@ -22,4 +22,8 @@ a:visited {
 .logoAvax {
     width: 8%;
     margin-bottom: -5px;
-  }
+}
+
+.header .mat-toolbar-row {
+    height: 50px;
+}
