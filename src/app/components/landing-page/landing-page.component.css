@@ -33,3 +33,7 @@
   width: 20%;
   margin-bottom: -5px;
 }
+
+p, button {
+  font-size: 1.25em;
+}

@@ -9,6 +9,7 @@ import { SmartcontractService } from '../../services/smartcontract.service';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })
+
 export class OrdersComponent implements OnInit {
   orders : Order[] = [];
   ordersToDisplay : Order[] = [];
