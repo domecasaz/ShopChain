@@ -1,27 +1,27 @@
 <div class="orderForm">
-    <form [formGroup]="order" (ngSubmit)="createOrder()">
+    <form [formGroup]="orderForm" (ngSubmit)="createOrder()">
         <mat-form-field appearance="fill">
             <mat-label>Prezzo: </mat-label>
-            <input type="number" name="price" id="price" matInput formControlName="price">
+            <input type="number" name="price" id="price" matInput formControlName="price" required autofocus>
             <mat-error *ngIf="price.errors?.['min']">Prezzo basso</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Indirizzo Venditore: </mat-label>
-            <input type="text" name="sellerAddress" id="sellerAddress" matInput placeholder="Prova"
-                formControlName="sellerAddress">
+            <input type="text" name="sellerAddress" id="sellerAddress" matInput placeholder="Es. 0xEbDC67e05348AB26BF1a5662B3C7129BE08a601f"
+                formControlName="sellerAddress" required>
             <mat-error *ngIf="sellerAddress.touched && sellerAddress.errors?.['isAddress']">Indirizzo non valido
             </mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Indirizzo Compratore: </mat-label>
-            <input type="text" name="buyerAddress" id="buyerAddress" matInput placeholder="Prova"
-                formControlName="buyerAddress">
+            <input type="text" name="buyerAddress" id="buyerAddress" matInput placeholder="Es. 0xEbDC67e05348AB26BF1a5662B3C7129BE08a601f"
+                formControlName="buyerAddress" required>
             <mat-error *ngIf="buyerAddress.touched && buyerAddress.errors?.['isAddress']">Indirizzo non valido
             </mat-error>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" type="submit">Crea Ordine</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!orderForm.valid">Crea Ordine</button>
     </form>
 </div>

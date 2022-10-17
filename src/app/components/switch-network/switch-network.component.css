@@ -4,15 +4,11 @@
     justify-content: center;
     align-items: center;
     margin-top: 8%;
+    font-size: small;
 }
 
 .switch h1 {
     font-weight: bold;
-    font-size: 2em;
-}
-
-.switch h2 {
-    font-size: 1.5em;
 }
 
 .switch button {

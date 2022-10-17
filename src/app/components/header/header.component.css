@@ -3,8 +3,7 @@
 }
 
 .title {
-    padding-top: 100px;
-    padding-left: 30px;
+    padding-top: 5%;
 }
 
 a {
@@ -24,6 +23,7 @@ a:visited {
     margin-bottom: -5px;
 }
 
-.header .mat-toolbar-row {
-    height: 50px;
+.header mat-toolbar-row {
+    font-size:medium;
+    height: 2em;
 }

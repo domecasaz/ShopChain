@@ -1,22 +1,26 @@
 <div class="filters">
     <form [formGroup]="filters" (ngSubmit)="filterOrders()">
-        <mat-form-field appearance="fill">
-            <mat-label>Stato: </mat-label>
-            <mat-select formControlName="state">
-                <mat-option *ngFor="let state of stateList" [value]="state">{{state}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+        <div class="form-fields">
+            <mat-form-field appearance="fill">
+                <mat-label>Stato: </mat-label>
+                <mat-select formControlName="state">
+                    <mat-option *ngFor="let state of stateList" [value]="state">{{state}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill">
+                <mat-label>Indirizzo Venditore: </mat-label>
+                <input type="text" name="sellerAddress" id="sellerAddress" matInput
+                    placeholder="Es. 0xEbDC67e05348AB26BF1a5662B3C7129BE08a601f" formControlName="sellerAddress">
+                <mat-error *ngIf="sellerAddress.touched && sellerAddress.errors?.['isAddress']">Indirizzo non valido
+                </mat-error>
+            </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>Indirizzo Venditore: </mat-label>
-            <input type="text" name="sellerAddress" id="sellerAddress" matInput placeholder="Es. 0xEbDC67e05348AB26BF1a5662B3C7129BE08a601f"
-                formControlName="sellerAddress">
-            <mat-error *ngIf="sellerAddress.touched && sellerAddress.errors?.['isAddress']">Indirizzo non valido
-            </mat-error>
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" type="submit">Applica Filtri</button>
-        <button mat-raised-button type="button" class="reset" (click)="resetFilters()">Reset Filtri</button>
+        <div class="form-buttons">
+            <button mat-raised-button color="primary" type="submit">Applica Filtri</button>
+            <button mat-raised-button type="button" class="reset" (click)="resetFilters()">Reset Filtri</button>
+        </div>
     </form>
 </div>
 
@@ -25,11 +29,11 @@
     <table class="mat-elevation-z8 ordersTable">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Indirizzo Venditore</th>
-                <th>Prezzo</th>
-                <th>Stato</th>
-                <th>Dettagli</th>
+                <th scope="col">ID</th>
+                <th scope="col">Indirizzo Venditore</th>
+                <th scope="col">Prezzo</th>
+                <th scope="col">Stato</th>
+                <th scope="col">Dettagli</th>
             </tr>
         </thead>
         <tbody>

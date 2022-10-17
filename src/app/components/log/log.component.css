@@ -10,7 +10,7 @@ table, td, th {
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #d6d6d6;
 }
 
 .logs {
@@ -19,4 +19,30 @@ tr:nth-child(even) {
 
 .logsTable {
     margin-top: 5%;
+}
+
+.logsTable th{
+    background-color: #bfd6ff;
+}
+
+.state {
+    font-weight: bold;
+}
+.Created {
+    color: #29ab27;
+}
+.Deleted {
+    color: #CF1507;
+}
+.Shipped {
+    color: #a69728;
+}
+.RefundAsked {
+    color: #c95918;
+}
+.Refunded {
+    color: #6112b5;
+}
+.Confirmed {
+    color: #1311a8;
 }

@@ -4,23 +4,23 @@
     <table class="mat-elevation-z8 orderTable">
         <tbody>
             <tr>
-                <th>Indirizzo Venditore: </th>
+                <th>Indirizzo Venditore</th>
                 <td>{{order.sellerAddress}}</td>
             </tr>
             <tr>
-                <th>ID: </th>
+                <th>ID</th>
                 <td>{{order.id}}</td>
             </tr>
             <tr>
-                <th>Prezzo: </th>
+                <th>Prezzo</th>
                 <td>{{order.amount}}</td>
             </tr>
             <tr>
-                <th>Stato: </th>
+                <th>Stato</th>
                 <td ngClass="{{order.state}} state">{{order.state}}</td>
             </tr>
             <tr>
-                <th>Operazioni: </th>
+                <th>Operazioni</th>
                 <td>
                     <div *ngIf="order.state === 'Created' || order.state === 'Shipped' || order.state === 'Confirmed'; then thenBlock1 else elseBlock1"></div>
                     <ng-template #thenBlock1>

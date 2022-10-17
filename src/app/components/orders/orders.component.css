@@ -1,10 +1,12 @@
 .mat-form-field {
-    margin: 4%;
+    margin-right: 4%;
 }
 
 form button {
     margin: 4%;
-    min-width: 25%;
+    width: 15vw;
+    min-width: 125px;
+    max-width: 200px;
 }
 
 .filters {
@@ -18,9 +20,18 @@ form button {
 
 .filters form {
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: center;
     align-items: center;
+    width: 100%;
+}
+
+.form-fields, .form-buttons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .reset {
@@ -30,15 +41,16 @@ form button {
 
 .orders {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
     width: auto;
     padding-bottom: 5%;
+    overflow: scroll;
 }
 
 table, td, th {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #000;
     border-collapse: collapse;
     text-align: center;
 }
@@ -47,8 +59,12 @@ table, td, th {
     padding: 1em;
 }
 
+.ordersTable th {
+    background-color: #bfd6ff;
+}
+
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #d6d6d6;
 }
 
 .state {

@@ -1,5 +1,5 @@
 table, td, th {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #000;
     border-collapse: collapse;
     text-align: center;
 }
@@ -9,16 +9,26 @@ table, td, th {
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #d6d6d6;
+}
+
+th:nth-child(odd) {
+    border-right: 1px solid #000;
+}
+
+.orderTable th {
+    background-color: #bfd6ff;
+    border-right: 1px solid #000;
 }
 
 .order {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
     width: auto;
     padding-top: 5%;
+    overflow: scroll;
 }
 
 .loading {

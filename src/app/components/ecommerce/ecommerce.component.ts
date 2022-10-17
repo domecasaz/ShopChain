@@ -25,7 +25,7 @@ export class EcommerceComponent implements OnInit {
   public POSTConfirmed : boolean = false;
   private id : number = 0;
  
-  order : FormGroup = new FormGroup({
+  orderForm : FormGroup = new FormGroup({
     price: new FormControl(0, [
       Validators.required,
       Validators.min(0.0000001)
@@ -40,16 +40,17 @@ export class EcommerceComponent implements OnInit {
     ])
   });
 
-  get price() : any { return this.order.get('price'); }
-  get sellerAddress() : any { return this.order.get('sellerAddress'); }
-  get buyerAddress() : any { return this.order.get('buyerAddress'); }
+  get price() : any { return this.orderForm.get('price'); }
+  get sellerAddress() : any { return this.orderForm.get('sellerAddress'); }
+  get buyerAddress() : any { return this.orderForm.get('buyerAddress'); }
 
   createOrder() : void {
+    console.log("qui")
     const order = {
       id: this.id,
-      price: this.order.value.price.toString(),
-      sellerAddress: this.order.value.sellerAddress,
-      buyerAddress: this.order.value.buyerAddress
+      price: this.orderForm.value.price.toString(),
+      sellerAddress: this.orderForm.value.sellerAddress,
+      buyerAddress: this.orderForm.value.buyerAddress
     }
     fetch('http://localhost:8000/orders', {
       method: 'POST',
