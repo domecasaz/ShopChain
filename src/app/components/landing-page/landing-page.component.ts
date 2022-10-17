@@ -59,7 +59,7 @@ export class LandingPageComponent implements OnInit {
     })
   }
   
-  async createOrder() : Promise<void> {
+  async createTransaction() : Promise<void> {
     if (await this.smartContract.createOrder(this.order.sellerAddress, this.order.price.toString(), () => {this.isLoading = true})){
       this.isLoading = false;
       this.txConfirmed = true;

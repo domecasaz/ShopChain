@@ -49,7 +49,7 @@
                     <mat-spinner></mat-spinner>
                 </ng-template>
                 <ng-template #elseBlock4>
-                    <button mat-raised-button color="primary" type="button" (click)="createOrder()">Crea Ordine</button>
+                    <button aria-label="Crea transazione" mat-raised-button color="primary" type="button" (click)="createTransaction()">Crea Transazione</button>
                 </ng-template>
 
                 <div *ngIf="txConfirmed" class="txConfirmed">
